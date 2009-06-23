@@ -10,7 +10,6 @@ class FileTracker
     paths.each do |path|
       Dir["#{path}Screenshot**.png"].each do |file|
         self.add file, state
-        puts File.mtime(file)
       end
     end
   end
