@@ -6,7 +6,7 @@ class FileUploader
     self.new.process_upload(file)
   end
 
-  def initialize(config = YAML.load_file("#{ENV['HOME']}/.captured.yml"))
+  def initialize(config = YAML.load_file(Captured.config_file))
     if config['upload']['type'] == "eval"
       @upload_command = config['upload']['command']
     else

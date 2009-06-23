@@ -14,25 +14,7 @@ Gem::Specification.new do |s|
      "README.markdown"
   ]
   s.files = [
-    ".document",
-     ".gitignore",
-     "LICENSE",
-     "README.markdown",
-     "Rakefile",
-     "VERSION",
-     "bin/capture",
-     "bin/captured",
-     "lib/captured.rb",
-     "lib/captured/file_tracker.rb",
-     "lib/captured/file_uploader.rb",
-     "lib/captured/fs_events.rb",
-     "resources/captured.png",
-     "resources/green_check.png",
-     "resources/red_star.png",
-     "resources/red_x.png",
-     "resources/ruby.png",
-     "spec/captured_spec.rb",
-     "spec/spec_helper.rb"
+    "etc/captured.yml-example"
   ]
   s.homepage = %q{http://github.com/csexton/captured}
   s.rdoc_options = ["--charset=UTF-8"]

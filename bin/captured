@@ -5,5 +5,30 @@ require 'optparse'
 $:.unshift File.join(File.dirname(__FILE__), '..', 'lib')
 require 'captured'
 
+OptionParser.new do |opts|
+  opts.summary_width = 25
+
+  opts.banner = "captured: Quick screen capture and sharing on OS X"
+
+  opts.on('--help', "Print this message") do
+    puts "#{opts}\n"
+    exit
+  end
+
+  opts.on('--startup', "Run at startup") do
+    puts "install launchd!"
+    exit
+  end
+
+  opts.on('--config', "Install a config file to #{Captured.config_file}") do
+    puts "install config file!"
+    if (File.exists? Captured.config_file)
+      FileUtils.copy("#{File.dirname(__FILE__)}/../etc/captured.yml-example", Captured.config_file)
+
+    end
+    exit
+  end
+end.parse!
+
 Captured::run!
 

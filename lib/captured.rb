@@ -4,7 +4,12 @@ require 'captured/file_uploader'
 require 'captured/fs_events'
 
 
+
 class Captured
+  def self.config_file
+    "#{ENV['HOME']}/.captured.yml" 
+  end
+
   def self.run!
     desktop_dir = "#{ENV['HOME']}/Desktop/"
     tracker = FileTracker.new

@@ -1,0 +1,4 @@
+# Example config
+upload:
+  command: system "scp '#{file}' 'fuzzymonk.com:fuzzymonk.com/captured/#{remote_name}'"
+  type: eval
