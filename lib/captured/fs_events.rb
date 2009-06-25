@@ -1,12 +1,12 @@
-require 'osx/foundation'
-OSX.require_framework '/System/Library/Frameworks/CoreServices.framework/Frameworks/CarbonCore.framework'
-
 class FSEvents
   def initialize(dir = "#{HOME}/Desktop")
     @watch_dir = dir
   end
 
   def run
+    require 'osx/foundation'
+    OSX.require_framework '/System/Library/Frameworks/CoreServices.framework/Frameworks/CarbonCore.framework'
+
     callback = proc do |stream, ctx, numEvents, paths, marks, eventIDs|
 
       #p stream
