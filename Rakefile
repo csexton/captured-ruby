@@ -11,7 +11,7 @@ begin
     gem.authors = ["Christopher Sexton"]
     gem.rubyforge_project = 'captured'
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
-    gem.files = Dir["etc/*"]
+    gem.files = FileList["[A-Z]*.*", "{bin,etc,lib,features,resources,spec}/**/*"]
   end
 
 rescue LoadError
