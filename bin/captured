@@ -5,7 +5,6 @@ require 'optparse'
 $:.unshift File.join(File.dirname(__FILE__), '..', 'lib')
 require 'captured'
 
-puts "Captured!"
 options = {}
 OptionParser.new do |opts|
   opts.summary_width = 25
@@ -64,7 +63,6 @@ end.parse!
 
 
 if options[:launchd] == true
-  puts "Running from launchd GAH"
   Captured::run_once!
 end
 

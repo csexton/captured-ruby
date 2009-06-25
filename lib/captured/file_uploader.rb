@@ -1,7 +1,7 @@
 require 'digest/md5'
 require 'erb'
 
-GROWL_BIN = "/usr/local/bin/growlnotify" unless defined? GROWL_BIN
+GROWL_BIN = "/usr/local/bin/growlnotify"
 
 class FileUploader
   def self.upload(file)
@@ -21,8 +21,8 @@ class FileUploader
 
   def process_upload(file)
     remote_name = Digest::MD5.hexdigest(file+Time.now.to_i.to_s) +  File.extname(file)
-    puts "Uploading #{file}, remote name #{remote_name}!"
     if eval @upload_command
+      puts "Uploaded '#{file}' to '#{remote_name}'"
       raise "Copy Failed" unless system("echo 'http://fuzzymonk.com/captured/#{remote_name}' | pbcopy")
       growl("Uploaded Image", file)
     else 
