@@ -34,7 +34,7 @@ begin
         )
 
         host = "#{config['username']}@rubyforge.org"
-        remote_dir = " /var/www/gforge-projects/captured"
+        remote_dir = " /var/www/gforge-projects/captured/"
         local_dir = 'rdoc'
 
         Rake::SshDirPublisher.new(host, remote_dir, local_dir).upload
