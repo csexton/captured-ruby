@@ -1,5 +1,6 @@
 require 'digest/md5'
 require 'erb'
+require 'yaml'
 
 class FileUploader
   def self.upload(file, options)
