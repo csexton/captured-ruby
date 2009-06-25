@@ -5,7 +5,11 @@ require 'optparse'
 $:.unshift File.join(File.dirname(__FILE__), '..', 'lib')
 require 'captured'
 
-options = {}
+options = {:config_file => "#{ENV['HOME']}/.captured.yml",
+           :watch_path => "#{ENV['HOME']}/Desktop/",
+           :watch_pattern => "Screenshot**.png", 
+           :growl_path => "/usr/local/bin/growlnotify" }
+
 OptionParser.new do |opts|
   opts.summary_width = 25
 
@@ -17,20 +21,24 @@ OptionParser.new do |opts|
     exit
   end
 
+  opts.on('--config-file=FILE', "Config file (Default: #{options[:config_file]})") do |file|
+    options[:config_file] = file
+  end
+
+  opts.on('--watch-path=PATH', "Path to watch (Default: #{options[:watch_path]})") do |path|
+    options[:watch_path] = path
+  end
+
+  opts.on('--watch-pattern=PATTERN', "Pattern to match (Default: #{options[:watch_pattern]})") do |path|
+    options[:watch_path] = path
+  end
+
+  opts.on('--growlnotify=PATH', "Path to growlnotify (Default: #{options[:growl_path]})") do |file|
+    options[:growl_path] = file
+  end
+
   opts.on('--install', "Run at startup") do
-    puts "Installing captured"
-    require 'erb'
-    require 'pathname'
-    program_path = Pathname.new($0).realpath
-    desktop_path = "#{ENV['HOME']}/Desktop/"
-    plist_path = "#{ENV['HOME']}/Library/LaunchAgents/"
-    template = ERB.new(File.open("#{File.dirname(__FILE__)}/../etc/launchd.plist.erb", 'r').read)
-    FileUtils.mkdir_p plist_path
-    File.open("#{plist_path}/com.github.csexton.captured", 'w') do |f| 
-      f.write(template.result(binding)) 
-    end
-    system "launchctl load ~/Library/LaunchAgents"
-    exit
+    options[:install] = true
   end
 
   opts.on('--remove', "Remove captured from launchd") do
@@ -39,11 +47,6 @@ OptionParser.new do |opts|
     system "launchctl remove com.github.csexton.captured"
     exit
   end
-
-  # TODO: this is not passed on to the uploader
-  #  opts.on('--growlnotify=PATH', "Full path to growlnotify") do |path|
-  #    options[:growlnotify] = path
-  #  end
 
   opts.on('--launchd', "Indicate that this was invoked via launchd") do
     options[:launchd] = true
@@ -55,26 +58,48 @@ OptionParser.new do |opts|
 
   opts.on('--config', "Install a config file to #{Captured.config_file}") do
     puts "install config file!"
-    if (File.exists? Captured.config_file)
+    if (!File.exists? Captured.config_file)
       FileUtils.copy("#{File.dirname(__FILE__)}/../etc/captured.yml-example", Captured.config_file)
     end
     exit
   end
+
 end.parse!
 
+if options[:install] == true
+    puts "Installing captured"
+    require 'erb'
+    require 'pathname'
+    if (File.exists? options[:config_file])
+      puts "Found existing config file at #{options[:config_file]}"
+    else
+      FileUtils.copy("#{File.dirname(__FILE__)}/../etc/captured.yml-example", options[:config_file])
+      puts "Copied example config file to #{options[:config_file]}"
+    end
+    program_path = Pathname.new($0).realpath
+    watch_path = options[:watch_path]
+    plist_path = "#{ENV['HOME']}/Library/LaunchAgents/"
+    template = ERB.new(File.open("#{File.dirname(__FILE__)}/../etc/launchd.plist.erb", 'r').read)
+    FileUtils.mkdir_p plist_path
+    File.open("#{plist_path}/com.github.csexton.captured", 'w') do |f| 
+      f.write(template.result(binding)) 
+    end
+    system "launchctl load ~/Library/LaunchAgents"
+    exit
+end
 
 if options[:launchd] == true
-  Captured::run_once!
+  Captured::run_once! options
   exit
 end
 
 if options[:watch] == true
-  Captured::run_and_watch!
+  Captured::run_and_watch! options
   exit
 end
 
 if ARGV[0] && File.exists?(ARGV[0])
-  FileUploader.upload(ARGV[0])
+  FileUploader.upload(ARGV[0], options)
   exit
 end
 

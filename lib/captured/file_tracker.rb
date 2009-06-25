@@ -1,14 +1,15 @@
 class FileTracker
   attr_accessor :tracked_files
 
-  def initialize
+  def initialize(options)
+    @options = options
     @tracked_files = {}
   end
 
   def scan(paths, state)
-    puts "Scannign #{paths}"
+    puts "Scanning #{paths}"
     paths.each do |path|
-      Dir["#{path}Screenshot**.png"].each do |file|
+      Dir["#{path}#{@options[:watch_pattern]}"].each do |file|
         self.add file, state
       end
     end

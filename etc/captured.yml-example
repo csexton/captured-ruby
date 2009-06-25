@@ -1,4 +1,50 @@
-# Example config
-upload:
-  command: system "scp '#{file}' 'fuzzymonk.com:fuzzymonk.com/captured/#{remote_name}'"
-  type: eval
+# Example captured configuration file
+#
+# Eval
+# ====
+#
+# Complete control for the complete nerd. This allows you to execute arbtrary 
+# ruby code when a matching file is found. Normally this would be used to 
+# invoke a command line upload (such as scp, curl, etc). 
+#
+# One advantage with calling scp this way is it will be aware of all the custom
+# settings made in ~/.ssh/config.
+#
+# You have access to two local varibles:
+#  * file - the local file to upload
+#  * remote_name - the hashed name to use on the server
+#
+# Simple scp via eval command
+
+#upload:
+#  type: eval
+#  command: system "scp '#{file}' 'user@example.com:example.com/captured/#{remote_name}'"
+#  url: "http://example.com/captured/"
+
+# Curl post to twitpic.com
+
+#upload:
+#  type: eval
+#  url: "http://twitter.com/user/"
+#  command: |
+#    remote_path="http://twitter.com/user"
+#    system "curl -F media='@#{file}' -F username=user -F password=secret -F message=Captured http://twitpic.com/api/uploadAndPost"
+#
+#  scp
+#  ===
+#
+#  Standard scp, using the ruby net/ssh library.
+#
+#  * user - optinal if your remote user is the same as your local user
+#  * password - optional if you have setup key pair authentication
+#  * host - the remote host name
+#  * url - the public url to the remote host+path
+#  * path - the remote path to upload to
+
+#upload:
+#  type: scp
+#  user: user
+#  host: example.com
+#  path: example.com/captured/
+#  url: "http://example.com/captured/"
+
