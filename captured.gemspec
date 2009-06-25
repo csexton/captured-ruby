@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{captured}
-  s.version = "0.1.1"
+  s.version = "0.1.3"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Christopher Sexton"]
@@ -15,8 +15,21 @@ Gem::Specification.new do |s|
      "README.markdown"
   ]
   s.files = [
-    "etc/captured.yml-example",
-     "etc/launchd.plist.erb"
+    "README.markdown",
+     "bin/captured",
+     "etc/captured.yml-example",
+     "etc/launchd.plist.erb",
+     "lib/captured.rb",
+     "lib/captured/file_tracker.rb",
+     "lib/captured/file_uploader.rb",
+     "lib/captured/fs_events.rb",
+     "resources/captured.png",
+     "resources/green_check.png",
+     "resources/red_star.png",
+     "resources/red_x.png",
+     "resources/ruby.png",
+     "spec/captured_spec.rb",
+     "spec/spec_helper.rb"
   ]
   s.homepage = %q{http://github.com/csexton/captured}
   s.rdoc_options = ["--charset=UTF-8"]
