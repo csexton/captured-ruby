@@ -10,6 +10,7 @@ OptionParser.new do |opts|
   opts.summary_width = 25
 
   opts.banner = "captured: Quick screen capture and sharing on OS X"
+  opts.banner = "        <filename>            Quick upload"
 
   opts.on('--help', "Print this message") do
     puts "#{opts}\n"
@@ -40,9 +41,9 @@ OptionParser.new do |opts|
   end
 
   # TODO: this is not passed on to the uploader
-#  opts.on('--growlnotify=PATH', "Full path to growlnotify") do |path|
-#    options[:growlnotify] = path
-#  end
+  #  opts.on('--growlnotify=PATH', "Full path to growlnotify") do |path|
+  #    options[:growlnotify] = path
+  #  end
 
   opts.on('--launchd', "Indicate that this was invoked via launchd") do
     options[:launchd] = true
@@ -64,10 +65,17 @@ end.parse!
 
 if options[:launchd] == true
   Captured::run_once!
+  exit
 end
 
 if options[:watch] == true
   Captured::run_and_watch!
+  exit
 end
 
+if ARGV[0] && File.exists?(ARGV[0])
+  FileUploader.upload(ARGV[0])
+  exit
+end
 
+puts "Invalid option, run `captured --help` for usage"

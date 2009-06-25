@@ -1,8 +1,0 @@
-#!/usr/bin/env ruby
-require 'rubygems'
-require 'optparse'
-
-$:.unshift File.join(File.dirname(__FILE__), '..', 'lib')
-require 'captured'
-
-FileUploader.upload(ARGV[0])
