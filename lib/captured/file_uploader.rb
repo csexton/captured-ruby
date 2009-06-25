@@ -1,14 +1,19 @@
 require 'digest/md5'
 require 'erb'
 
+GROWL_BIN = "/usr/local/bin/growlnotify" unless defined? GROWL_BIN
+
 class FileUploader
   def self.upload(file)
     self.new.process_upload(file)
   end
 
   def initialize(config = YAML.load_file(Captured.config_file))
-    if config['upload']['type'] == "eval"
+    case config['upload']['type']
+    when"eval"
       @upload_command = config['upload']['command']
+    when"scp"
+    when"ftp"
     else
       raise "Invalid Type"
     end
@@ -29,6 +34,6 @@ class FileUploader
   end
 
   def growl(msg, image = "#{File.dirname(File.expand_path(__FILE__))}/../../resources/red_x.png")
-      raise "Growl Failed" unless system("growlnotify -t 'Captured' -m '#{msg}' --image '#{image}'")
+      raise "Growl Failed" unless system("#{GROWL_BIN} -t 'Captured' -m '#{msg}' --image '#{image}'")
   end
 end

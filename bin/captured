@@ -5,6 +5,8 @@ require 'optparse'
 $:.unshift File.join(File.dirname(__FILE__), '..', 'lib')
 require 'captured'
 
+puts "Captured!"
+options = {}
 OptionParser.new do |opts|
   opts.summary_width = 25
 
@@ -15,20 +17,59 @@ OptionParser.new do |opts|
     exit
   end
 
-  opts.on('--startup', "Run at startup") do
-    puts "install launchd!"
+  opts.on('--install', "Run at startup") do
+    puts "Installing captured"
+    require 'erb'
+    require 'pathname'
+    program_path = Pathname.new($0).realpath
+    desktop_path = "#{ENV['HOME']}/Desktop/"
+    plist_path = "#{ENV['HOME']}/Library/LaunchAgents/"
+    template = ERB.new(File.open("#{File.dirname(__FILE__)}/../etc/launchd.plist.erb", 'r').read)
+    FileUtils.mkdir_p plist_path
+    File.open("#{plist_path}/com.github.csexton.captured", 'w') do |f| 
+      f.write(template.result(binding)) 
+    end
+    system "launchctl load ~/Library/LaunchAgents"
     exit
+  end
+
+  opts.on('--remove', "Remove captured from launchd") do
+    puts "Uninstalling captured" 
+    File.delete "#{ENV['HOME']}/Library/LaunchAgents/com.github.csexton.captured"
+    system "launchctl remove com.github.csexton.captured"
+    exit
+  end
+
+  # TODO: this is not passed on to the uploader
+#  opts.on('--growlnotify=PATH', "Full path to growlnotify") do |path|
+#    options[:growlnotify] = path
+#  end
+
+  opts.on('--launchd', "Indicate that this was invoked via launchd") do
+    options[:launchd] = true
+  end
+
+  opts.on('--watch', "Create a run loop that will watch for screenshots") do
+    options[:launchd] = true
   end
 
   opts.on('--config', "Install a config file to #{Captured.config_file}") do
     puts "install config file!"
     if (File.exists? Captured.config_file)
       FileUtils.copy("#{File.dirname(__FILE__)}/../etc/captured.yml-example", Captured.config_file)
-
     end
     exit
   end
 end.parse!
 
-Captured::run!
+
+if options[:launchd] == true
+  puts "Running from launchd GAH"
+  Captured::run_once!
+end
+
+if options[:watch] == true
+  Captured::run_and_watch!
+end
+
 

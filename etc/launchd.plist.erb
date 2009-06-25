@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+  <dict>
+    <key>Label</key>
+    <string>com.github.csexton.captured</string>
+    <key>LowPriorityIO</key>
+    <true/>
+    <key>Program</key>
+    <string><%= program_path %></string>
+    <key>ProgramArguments</key>
+    <array>
+      <string>captured</string>
+      <string>--launchd</string>
+    </array>
+    <key>WatchPaths</key>
+    <array>
+      <string><%= desktop_path %></string>
+    </array>
+  </dict>
+</plist>
