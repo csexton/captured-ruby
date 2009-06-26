@@ -1,6 +1,5 @@
 require 'captured/file_tracker'
 require 'captured/file_uploader'
-require 'captured/fs_events'
 
 class Captured
   def self.config_file
@@ -18,6 +17,7 @@ class Captured
   end
 
   def self.run_and_watch!(options)
+    require 'captured/fs_events'
     watch_path = options[:watch_path] || "#{ENV['HOME']}/Desktop/"
     tracker = FileTracker.new(options)
     tracker.scan([desktop_dir], :existing)
