@@ -23,6 +23,7 @@ The simplest way is to use the scp type.
  * url - the public url to the remote host+path
  * path - the remote path to upload to
 
+<pre>
 	upload:
 	  type: scp
 	  user: user
@@ -30,6 +31,7 @@ The simplest way is to use the scp type.
 	  host: example.com
 	  path: path/to/captured/
 	  url: "http://example.com/captured/"
+</pre>
 
 
 
