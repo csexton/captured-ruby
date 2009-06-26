@@ -9,7 +9,7 @@ Install
 
 to install captured:
 
-	$ sudo gem install csexton-captured -s http://gems.github.com
+	$ sudo gem install captured
 	$ captured --install
 	$ open -e ~/.captured.yml
 
@@ -26,8 +26,9 @@ The simplest way is to use the scp type.
 	upload:
 	  type: scp
 	  user: user
+	  password: secret
 	  host: example.com
-	  path: example.com/captured/
+	  path: path/to/captured/
 	  url: "http://example.com/captured/"
 
 

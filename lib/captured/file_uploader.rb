@@ -38,10 +38,11 @@ class FileUploader
     require 'etc'
     settings = @config['upload']
     lambda do |file, remote_name|
-      #puts "host = '#{settings['host']}'"
-      #puts "user = '#{settings['user'] || Etc.getlogin}'"
-      #puts "file = '#{file}'"
-      #puts "path = '#{settings['path']+remote_name}'"
+      puts "host = '#{settings['host']}'"
+      puts "user = '#{settings['user'] || Etc.getlogin}'"
+      puts "file = '#{file}'"
+      puts "path = '#{settings['path']+remote_name}'"
+      puts "password = '#{settings['password']}'"
       Net::SCP.upload!(settings['host'], 
                        settings['user'] || Etc.getlogin,
                        file,

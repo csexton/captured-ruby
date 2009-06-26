@@ -1,5 +1,5 @@
-require 'captured/file_tracker'
-require 'captured/file_uploader'
+require "#{File.dirname(__FILE__)}/captured/file_tracker"
+require "#{File.dirname(__FILE__)}/captured/file_uploader"
 
 class Captured
   def self.config_file

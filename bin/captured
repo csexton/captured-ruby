@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 require 'rubygems'
 require 'optparse'
-require "#{File.dirname(__FILE__)}/../lib/captured"
+require "#{File.dirname(__FILE__)}/../lib/captured.rb"
 
 options = {:config_file => "#{ENV['HOME']}/.captured.yml",
            :watch_path => "#{ENV['HOME']}/Desktop/",
