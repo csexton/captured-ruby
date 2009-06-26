@@ -7,7 +7,7 @@ class Captured
   end
 
   def self.guess_watch_path
-    if `sw_vers | awk '/ProductVersion:/ {print $2}'`.strip.start_with? "10.5"
+    if `sw_vers | awk '/ProductVersion:/ {print $2}'` =~ /10\.5/
       "Picture**.png"
     else
       "Screenshot**.png"
