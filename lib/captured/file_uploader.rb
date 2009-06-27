@@ -52,7 +52,7 @@ class FileUploader
     remote_name = Digest::MD5.hexdigest(file+Time.now.to_i.to_s) +  File.extname(file)
     remote_path = @upload_proc.call(file, remote_name)
     puts "Uploaded '#{file}' to '#{remote_path}'"
-    raise "Copy Failed" unless system("echo '#{remote_path}' | pbcopy")
+    raise "Copy Failed" unless system("echo '#{remote_path}' | /usr/bin/pbcopy")
     growl("Uploaded Image", "#{File.dirname(File.expand_path(__FILE__))}/../../resources/green_check.png")
   rescue => e 
     puts e
