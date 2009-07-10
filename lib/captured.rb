@@ -7,14 +7,8 @@ class Captured
   end
 
   def self.guess_watch_path
-    if `sw_vers | awk '/ProductVersion:/ {print $2}'` =~ /10\.5/
-      "Picture**.png"
-    else
-      "Screen**.png"
-    end
-  rescue => e
-    puts e
-    "Screen**.png"
+    # This should work for 10.5, and 10.6
+     "{Picture,Screen}*.png"
   end
 
   def self.run_once!(options)
