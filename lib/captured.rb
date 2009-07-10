@@ -10,11 +10,11 @@ class Captured
     if `sw_vers | awk '/ProductVersion:/ {print $2}'` =~ /10\.5/
       "Picture**.png"
     else
-      "Screenshot**.png"
+      "Screen**.png"
     end
   rescue => e
     puts e
-    "Screenshot**.png"
+    "Screen**.png"
   end
 
   def self.run_once!(options)
