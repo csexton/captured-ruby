@@ -42,7 +42,7 @@ class FileUploader
                        settings['user'] || Etc.getlogin,
                        file,
                        settings['path']+remote_name,
-                       :password => settings[:password])
+                       :password => settings['password'])
 
       "#{@config['upload']['url']}#{remote_name}"
     end
