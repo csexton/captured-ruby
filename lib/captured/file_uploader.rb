@@ -53,9 +53,9 @@ class FileUploader
     growl("Processing Upload", "#{File.dirname(File.expand_path(__FILE__))}/../../resources/action_run.png")
     remote_path = @upload_proc.call(file, remote_name)
     puts "Uploaded '#{file}' to '#{remote_path}'"
-    raise "Copy Failed" unless system("echo '#{remote_path}' | /usr/bin/pbcopy")
+    raise "Copy Failed" unless system("echo -n '#{remote_path}' | /usr/bin/pbcopy")
     growl("Upload Succeeded", "#{File.dirname(File.expand_path(__FILE__))}/../../resources/green_check.png")
-  rescue => e 
+  rescue => e
     puts e
     puts e.backtrace
     growl(e)
