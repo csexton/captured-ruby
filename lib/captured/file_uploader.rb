@@ -49,9 +49,9 @@ class FileUploader
   end
 
   def pbcopy(str)
-    pbcopy = IO.popen('pbcopy','w+')
-    pbcopy.print str
-    pbcopy.close_write
+    pbc = IO.popen('pbcopy','w+')
+    pbc.print str
+    pbc.close_write
   rescue
     raise "Copy to clipboard failed"
   end
