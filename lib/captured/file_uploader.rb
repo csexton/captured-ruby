@@ -48,12 +48,20 @@ class FileUploader
     end
   end
 
+  def pbcopy(str)
+    pbcopy = IO.popen('pbcopy','w+')
+    pbcopy.print str
+    pbcopy.close_write
+  rescue
+    raise "Copy to clipboard failed"
+  end
+
   def process_upload(file)
     remote_name = Digest::MD5.hexdigest(file+Time.now.to_i.to_s) +  File.extname(file)
     growl("Processing Upload", "#{File.dirname(File.expand_path(__FILE__))}/../../resources/action_run.png")
     remote_path = @upload_proc.call(file, remote_name)
     puts "Uploaded '#{file}' to '#{remote_path}'"
-    raise "Copy Failed" unless system("echo -n '#{remote_path}' | /usr/bin/pbcopy")
+    pbcopy remote_path
     growl("Upload Succeeded", "#{File.dirname(File.expand_path(__FILE__))}/../../resources/green_check.png")
   rescue => e
     puts e
