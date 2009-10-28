@@ -13,7 +13,7 @@ So, I am making some assumptions about the environment that captured runs in. In
  * A decent understanding of scp and ssh
  * That [Growl](http://growl.info/) (and the [growlnotify](http://growl.info/documentation/growlnotify.php) command-line tool) are installed
 
-With that said, once things are installed and configured it really is handy. 
+With that said, once things are installed and configured it really is handy.
 
 Install
 =======
