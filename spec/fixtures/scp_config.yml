@@ -1,0 +1,7 @@
+upload:
+  type: scp
+  user: user
+  host: example.com
+  path: example.com/captured/
+  url: "http://example.com/captured/"
+

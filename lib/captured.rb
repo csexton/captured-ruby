@@ -21,6 +21,7 @@ class Captured
     end
   end
 
+  # Depricated this is now handeled by launchd
   def self.run_and_watch!(options)
     require 'captured/fs_events'
     watch_path = options[:watch_path] || "#{ENV['HOME']}/Desktop/"
