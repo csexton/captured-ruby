@@ -1,2 +1,11 @@
 #!/usr/bin/env ruby
-puts "  Grrrr!"
+
+# Tests to ensure I am calling growlnotify correctly
+exit 1 if ARGV[0] != "-t"
+
+if !File.exists? ARGV[5]
+  puts "GROWL ERROR: Image file does not exist"
+  exit 1
+end
+
+#puts "  Grrrr! #{ARGV.inspect}"
