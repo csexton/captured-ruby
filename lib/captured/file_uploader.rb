@@ -49,9 +49,12 @@ class FileUploader
   end
 
   def pbcopy(str)
-    pbc = IO.popen('pbcopy','w+')
-    pbc.print str
-    pbc.close_write
+    system "ruby -e \"print '#{str}'\" | pbcopy"
+    # I prefer the following method but it was being intermitant about actually
+    # coping to the clipboard.
+    #IO.popen('pbcopy','w+') do |pbc|
+    #  pbc.print str
+    #end
   rescue
     raise "Copy to clipboard failed"
   end
