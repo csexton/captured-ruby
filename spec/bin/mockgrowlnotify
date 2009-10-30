@@ -1,11 +1,56 @@
 #!/usr/bin/env ruby
 
-# Tests to ensure I am calling growlnotify correctly
-exit 1 if ARGV[0] != "-t"
+options = {}
 
-if !File.exists? ARGV[5]
-  puts "GROWL ERROR: Image file does not exist"
-  exit 1
-end
+OptionParser.new do |opts|
+#    -h,--help       Display this help
+#    -v,--version    Display version number
+#    -n,--name       Set the name of the application that sends the notification
+#                    [Default: growlnotify]
+#    -s,--sticky     Make the notification sticky
+#    -a,--appIcon    Specify an application name to take the icon from
+#    -i,--icon       Specify a file type or extension to look up for the
+#                    notification icon
+#    -I,--iconpath   Specify a file whose icon will be the notification icon
+#       --image      Specify an image file to be used for the notification icon
+
+  opts.on('--image IMAGE', "Specify an image file to be used for the notification icon") do |img|
+    options[:image] = true
+    if !File.exists? img
+      puts "GROWL ERROR: Image file does not exist"
+      exit 1
+    end
+  end
+
+#    -m,--message    Sets the message to be used instead of using stdin
+  opts.on('-m', '--message MSG', "Specify an image file to be used for the notification icon") do |msg|
+    options[:message] = true
+    if !msg
+      puts "GROWL ERROR: No message"
+      exit 1
+    puts "growl: #{msg}"
+  end
+#                    Passing - as the argument means read from stdin
+#    -p,--priority   Specify an int or named key (default is 0)
+#    -d,--identifier Specify a notification identifier (used for coalescing)
+#    -H,--host       Specify a hostname to which to send a remote notification.
+#    -P,--password   Password used for remote notifications.
+#    -u,--udp        Use UDP instead of DO to send a remote notification.
+#       --port       Port number for UDP notifications.
+#    -A,--auth       Specify digest algorithm for UDP authentication.
+#                    Either MD5 [Default], SHA256 or NONE.
+#    -c,--crypt      Encrypt UDP notifications.
+#    -w,--wait       Wait until the notification has been dismissed.
+#       --progress   Set a progress value for this notification.
+    
+#    -t,--title      Does nothing. Any text following will be treated as the
+#                    title because that's the default argument behaviour
+  opts.on('-t', "Does nothing") do |msg|
+    options[:title] = true
+    if !msg
+      puts "GROWL ERROR: No title"
+      exit 1
+    puts "growl: #{msg}"
+  end
 
 #puts "  Grrrr! #{ARGV.inspect}"
