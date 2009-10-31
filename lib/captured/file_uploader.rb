@@ -12,39 +12,16 @@ class FileUploader
     @config = YAML.load_file(options[:config_file])
     case @config['upload']['type']
     when"eval"
-      @upload_proc = eval_proc
+      require File.expand_path(File.dirname(__FILE__) + '/uploaders/eval_uploader')
+      @uploader = EvalUploader.new(@config)
     when"scp"
-      @upload_proc = scp_proc
-    when"ftp"
+      require File.expand_path(File.dirname(__FILE__) + '/uploaders/scp_uploader')
+      @uploader = ScpUploader.new(@config)
+    when"imageshack"
+      require File.expand_path(File.dirname(__FILE__) + '/uploaders/imageshack_uploader')
+      @uploader = ImageshackUploader.new(@config)
     else
       raise "Invalid Type"
-    end
-  end
-
-  def eval_proc
-    lambda do |file, remote_name|
-      remote_path = nil
-      unless eval @config['upload']['command']
-        raise "Upload failed: Bad Eval in config file"
-      end
-      # if the eval defines remote_path we will copy that to the clipboard
-      # otherwise we compute it ouselves
-      remote_path || "#{@config['upload']['url']}#{remote_name}"
-    end
-  end
-
-  def scp_proc
-    require 'net/scp'
-    require 'etc'
-    settings = @config['upload']
-    lambda do |file, remote_name|
-      Net::SCP.upload!(settings['host'],
-                       settings['user'] || Etc.getlogin,
-                       file,
-                       settings['path']+remote_name,
-                       :password => settings['password'])
-
-      "#{@config['upload']['url']}#{remote_name}"
     end
   end
 
@@ -62,7 +39,8 @@ class FileUploader
   def process_upload(file)
     remote_name = Digest::MD5.hexdigest(file+Time.now.to_i.to_s) +  File.extname(file)
     growl("Processing Upload", "#{File.dirname(File.expand_path(__FILE__))}/../../resources/action_run.png")
-    remote_path = @upload_proc.call(file, remote_name)
+    @uploader.upload(file)
+    remote_path = @uploader.url
     puts "Uploaded '#{file}' to '#{remote_path}'"
     pbcopy remote_path
     growl("Upload Succeeded", "#{File.dirname(File.expand_path(__FILE__))}/../../resources/green_check.png")

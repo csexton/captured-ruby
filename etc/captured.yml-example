@@ -1,11 +1,40 @@
 # Example captured configuration file
 #
-# Eval
-# ====
+#  Standard upload type: Image Shack
+#  =================================
 #
-# Complete control for the complete nerd. This allows you to execute arbtrary 
-# ruby code when a matching file is found. Normally this would be used to 
-# invoke a command line upload (such as scp, curl, etc). 
+#  The default option is to post your images to imageshack.us, if you want to
+#  use one of the more advances and felxable types simply comment this out.
+
+upload:
+  type: imageshack
+
+#
+#  Powerful upload type: scp
+#  =========================
+#
+#  Standard scp, using the ruby net/ssh library.
+#
+#  * user - optinal if your remote user is the same as your local user
+#  * password - optional if you have setup key pair authentication
+#  * host - the remote host name
+#  * url - the public url to the remote host+path
+#  * path - the remote path to upload to
+
+#upload:
+#  type: scp
+#  user: user
+#  host: example.com
+#  path: example.com/captured/
+#  url: "http://example.com/captured/"
+
+#
+# Advanced upload type: Eval
+# ==========================
+#
+# Complete control for the complete nerd. This allows you to execute arbtrary
+# ruby code when a matching file is found. Normally this would be used to
+# invoke a command line upload (such as scp, curl, etc).
 #
 # One advantage with calling scp this way is it will be aware of all the custom
 # settings made in ~/.ssh/config.
@@ -30,21 +59,3 @@
 #    remote_path="http://twitter.com/user"
 #    system "curl -F media='@#{file}' -F username=user -F password=secret -F message=Captured http://twitpic.com/api/uploadAndPost"
 #
-#  scp
-#  ===
-#
-#  Standard scp, using the ruby net/ssh library.
-#
-#  * user - optinal if your remote user is the same as your local user
-#  * password - optional if you have setup key pair authentication
-#  * host - the remote host name
-#  * url - the public url to the remote host+path
-#  * path - the remote path to upload to
-
-#upload:
-#  type: scp
-#  user: user
-#  host: example.com
-#  path: example.com/captured/
-#  url: "http://example.com/captured/"
-

@@ -1,23 +1,28 @@
-require 'rubygems'
 require 'net/http'
 require 'uri'
 require 'cgi'
 require 'mime/types'
 
-class ShackMirror
+class ImageshackUploader
 
-  SHACK_ID = "captured"
   USER_AGENT = "Mozilla/5.0 (Macintosh; U; Intel Mac OS X; en) AppleWebKit/419 (KHTML, like Gecko) Safari/419.3"
   BOUNDARY = '----------PuSHerInDaBUSH_$'
 
   attr_reader :url
 
-  def initialize(img)
-    raise NonImageTypeError, 'Expected image file.' unless img =~ /jpe?g|png|gif|bmp|tif|tiff|swf$/
-      @img = img
-    @url, @hosturi, @res = "","",""
+  def initialize(config = {})
+    @config = config
+    @shack_id = config['upload']['shackid'] || "captured"
+  end
+
+  def upload(file_name)
+    unless file_name =~ /jpe?g|png|gif|bmp|tif|tiff|swf$/
+      raise(NonImageTypeError, 'Expected image file.')
+    end
+    @img = file_name
+    @posted_url, @hosturi, @res = "","",""
     @header, @params = {}, {}
-    @header['Cookie'] = "myimages=#{SHACK_ID}"
+    @header['Cookie'] = "myimages=#{@shack_id}"
     @header['User-Agent'] = USER_AGENT
     @params['uploadtype'] = 'on'  
     @params['brand'] = ''
@@ -27,9 +32,9 @@ class ShackMirror
     @params['rembar'] = '1'
     transfer
     getdirect
+    @url = @posted_url.gsub("content.php?page=done&l=", "")
   end
 
-  protected
 
   def prepare_multipart ( params )
     fp = []
@@ -61,7 +66,7 @@ class ShackMirror
     path !~ /^http/ ? "local" : "remote"
   end
 
-  def upload( query, headers={} )
+  def process_upload( query, headers={} )
     Net::HTTP.start(@hosturi.host) do | http |
       http.post(@hosturi.path, query, headers);
     end
@@ -87,7 +92,7 @@ class ShackMirror
     when "local"
       @hosturi = URI.parse('http://load.imageshack.us/index.php')
       prepFile(@img)
-      @res = upload($query,@header)
+      @res = process_upload($query,@header)
     when "remote"
       @hosturi = URI.parse('http://imageshack.us/transload.php')
       @res = transload(@img)
@@ -101,7 +106,7 @@ class ShackMirror
     #puts @res.methods.sort
     #doc = Hpricot(@res.body)
     #@url = (doc/"//input").last['value']
-    @url = @res.header['location']
+    @posted_url = @res.header['location']
   end
 
 end
@@ -138,7 +143,5 @@ class FileParam
 
 end
 
-s = ShackMirror.new(ENV["HOME"] + "/Desktop/g.png")
-puts s.url.gsub("content.php?page=done&l=", "")
 
 

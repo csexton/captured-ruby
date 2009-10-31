@@ -28,7 +28,20 @@ Then you will need to exit that config file with the appropriate settings for yo
 
 When you install it will copy an example config file to ~/.captured.yml, which has a few examples of possible configuration types.
 
-The simplest of this is to the scp type:
+Install Type: Imageshack
+------------------------
+The easiest way to do this is to use the image shack service. This service is a little slower, but is free and easy.
+
+<pre>
+	upload:
+	  type: scp
+</pre>
+  
+
+Install Type: scp
+-----------------
+
+If you have you own web server scp is a very handy way to host your own captures.
 
  * user - optional if your remote user is the same as your local user
  * password - optional if you have setup key pair authentication
