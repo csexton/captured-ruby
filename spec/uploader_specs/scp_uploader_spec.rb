@@ -6,11 +6,9 @@ describe "SCP File Uploader" do
   end
 
   it "should upload to the server" do
-    config = {"upload"=>{"url"=>"http://fuzzymonk.com/captured/", 
-      "type"=>"scp",
-      "path"=>"",
-      "host"=>""}}
-      "user"=>""}}
+    # This spec requires a scp_spec section in the config file with the
+    # scp settings
+    config = YAML.load_file("#{ENV['HOME']}/.captured.yml")['scp_spec']
 
     @uploader = ScpUploader.new(config)
     @uploader.upload(File.expand_path(File.dirname(__FILE__) + '/../../resources/captured.png'))
