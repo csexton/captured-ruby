@@ -5,12 +5,13 @@
 
 Gem::Specification.new do |s|
   s.name = %q{captured}
-  s.version = "0.2.3"
+  s.version = "0.2.4"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Christopher Sexton"]
-  s.date = %q{2009-10-28}
+  s.date = %q{2009-11-02}
   s.default_executable = %q{captured}
+  s.description = %q{Because <shift>-<command>-4 is the single most useful shorcut in Macdom}
   s.email = %q{csexton@gmail.com}
   s.executables = ["captured"]
   s.extra_rdoc_files = [
@@ -26,6 +27,9 @@ Gem::Specification.new do |s|
      "lib/captured/file_tracker.rb",
      "lib/captured/file_uploader.rb",
      "lib/captured/fs_events.rb",
+     "lib/captured/uploaders/eval_uploader.rb",
+     "lib/captured/uploaders/imageshack_uploader.rb",
+     "lib/captured/uploaders/scp_uploader.rb",
      "resources/2uparrow.png",
      "resources/action_run.png",
      "resources/captured.png",
@@ -33,8 +37,13 @@ Gem::Specification.new do |s|
      "resources/red_star.png",
      "resources/red_x.png",
      "resources/ruby.png",
+     "spec/bin/mockgrowlnotify",
      "spec/captured_spec.rb",
-     "spec/spec_helper.rb"
+     "spec/file_uploader_spec.rb",
+     "spec/fixtures/scp_config.yml",
+     "spec/spec_helper.rb",
+     "spec/uploader_specs/imageshack_uploader_spec.rb",
+     "spec/uploader_specs/scp_uploader_spec.rb"
   ]
   s.homepage = %q{http://github.com/csexton/captured}
   s.rdoc_options = ["--charset=UTF-8"]
@@ -44,7 +53,10 @@ Gem::Specification.new do |s|
   s.summary = %q{Quick screenshot sharing for OS X}
   s.test_files = [
     "spec/captured_spec.rb",
-     "spec/spec_helper.rb"
+     "spec/file_uploader_spec.rb",
+     "spec/spec_helper.rb",
+     "spec/uploader_specs/imageshack_uploader_spec.rb",
+     "spec/uploader_specs/scp_uploader_spec.rb"
   ]
 
   if s.respond_to? :specification_version then

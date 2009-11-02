@@ -6,6 +6,7 @@ begin
   Jeweler::Tasks.new do |gem|
     gem.name = "captured"
     gem.summary = "Quick screenshot sharing for OS X"
+    gem.description = "Because <shift>-<command>-4 is the single most useful shorcut in Macdom"
     gem.email = "csexton@gmail.com"
     gem.homepage = "http://github.com/csexton/captured"
     gem.authors = ["Christopher Sexton"]
