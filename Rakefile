@@ -66,6 +66,11 @@ Spec::Rake::SpecTask.new(:rcov) do |spec|
   spec.rcov = true
 end
 
+desc "Release to rubyforge and gemcutter"
+  task :release => ['gemcutter:release', 'rubyforge:release:gem'] do
+    puts "Released"
+  end
+
 
 task :default => :spec
 
