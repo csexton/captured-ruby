@@ -10,7 +10,7 @@ While I would love to tinker with this to make it easy to install (it is really 
 
 So, I am making some assumptions about the environment that captured runs in. In particular it expects:
 
- * A decent understanding of scp and ssh
+ * A decent understanding of installing ruby gems
  * That [Growl](http://growl.info/) (and the [growlnotify](http://growl.info/documentation/growlnotify.php) command-line tool) are installed
 
 With that said, once things are installed and configured it really is handy.
@@ -36,7 +36,6 @@ The easiest way to do this is to use the image shack service. This service is a 
 	upload:
 	  type: scp
 </pre>
-  
 
 Install Type: scp
 -----------------
@@ -59,13 +58,10 @@ If you have you own web server scp is a very handy way to host your own captures
 	  url: "http://example.com/captured/"
 </pre>
 
-
-
 Icons
 =====
 
 Icons from the [Crystal Clear](http://www.everaldo.com/crystal/) icon set by [Everaldo Coelho](http://en.wikipedia.org/wiki/Everaldo_Coelho). – The icons are [licensed](http://www.everaldo.com/crystal/?action=license) under the [GNU Lesser General Public License (LGPL)](http://en.wikipedia.org/wiki/GNU_Lesser_General_Public_License).
-
 
 Copyright
 =========

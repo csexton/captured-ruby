@@ -6,7 +6,7 @@ class EvalUploader
   end
 
   def gen_remote_name(file)
-    Digest::MD5.hexdigest(file+Time.now.to_i.to_s) +  File.extname(file)
+    Digest::MD5.hexdigest(file+Time.now.to_i.to_s) + File.extname(file)
   end
 
   def upload(file)

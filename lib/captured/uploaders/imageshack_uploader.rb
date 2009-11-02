@@ -3,12 +3,11 @@ require 'uri'
 require 'cgi'
 require 'mime/types'
 
+# Adapted from http://codesnippets.joyent.com/posts/show/1156
 class ImageshackUploader
-
+  attr_reader :url
   USER_AGENT = "Mozilla/5.0 (Macintosh; U; Intel Mac OS X; en) AppleWebKit/419 (KHTML, like Gecko) Safari/419.3"
   BOUNDARY = '----------PuSHerInDaBUSH_$'
-
-  attr_reader :url
 
   def initialize(config = {})
     @config = config
@@ -35,7 +34,6 @@ class ImageshackUploader
     @url = @posted_url.gsub("content.php?page=done&l=", "")
   end
 
-
   def prepare_multipart ( params )
     fp = []
     params.each do |k,v|
@@ -49,17 +47,12 @@ class ImageshackUploader
   end
 
   def prepFile(path_to_file)
-
     file = File.new(path_to_file)
-
     @header['Content-Type'] = "multipart/form-data, boundary=" + BOUNDARY + " "
-
     @params['url'] = 'paste image url here'
     @params['fileupload'] = file
-
     $query = prepare_multipart(@params)
     file.close
-
   end
 
   def locate(path)
@@ -73,21 +66,15 @@ class ImageshackUploader
   end
 
   def transload(url)
-
     @header['Content-Type'] = 'form-data'
-
     @params['url'] = url
     @params['fileupload'] = ''
-
     postreq = Net::HTTP::Post.new(@hosturi.path, @header)
     postreq.set_form_data(@params)
-
     return Net::HTTP.new(@hosturi.host, @hosturi.port).start { |http| http.request(postreq) }
-
   end
 
   def transfer
-
     case locate(@img)
     when "local"
       @hosturi = URI.parse('http://load.imageshack.us/index.php')
@@ -97,25 +84,20 @@ class ImageshackUploader
       @hosturi = URI.parse('http://imageshack.us/transload.php')
       @res = transload(@img)
     end
-
   end
 
   def getdirect
     puts @res.header
     puts @res.body
-    #puts @res.methods.sort
-    #doc = Hpricot(@res.body)
-    #@url = (doc/"//input").last['value']
     @posted_url = @res.header['location']
   end
 
 end
 
 class Param
-
   attr_accessor :k, :v
 
-  def initialize( k, v )
+  def initialize(k,v)
     @k = k
     @v = v
   end
@@ -123,14 +105,12 @@ class Param
   def to_multipart
     return "Content-Disposition: form-data; name=\"#{CGI::escape(k)}\"\r\n\r\n#{v}\r\n"
   end
-
 end
 
 class FileParam
-
   attr_accessor :k, :filename, :content
 
-  def initialize( k, filename, content )
+  def initialize(k, filename, content)
     @k = k
     @filename = filename
     @content = content
@@ -140,7 +120,6 @@ class FileParam
     return "Content-Disposition: form-data; name=\"#{CGI::escape(k)}\"; filename=\"#{filename}\"\r\n" +
       "Content-Type: #{MIME::Types.type_for(@filename)}\r\n\r\n" + content + "\r\n"
   end
-
 end
 
 
