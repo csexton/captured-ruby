@@ -23,6 +23,9 @@ class FileUploader
     else
       raise "Invalid Type"
     end
+  rescue
+    growl "Unable to load config file"
+    raise "Unable to load config file"
   end
 
   def pbcopy(str)

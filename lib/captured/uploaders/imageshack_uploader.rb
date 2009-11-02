@@ -1,7 +1,6 @@
 require 'net/http'
 require 'uri'
 require 'cgi'
-require 'mime/types'
 
 # Adapted from http://codesnippets.joyent.com/posts/show/1156
 class ImageshackUploader
@@ -114,11 +113,24 @@ class FileParam
     @k = k
     @filename = filename
     @content = content
+    @extension_index = {
+      'jpg' => "image/jpeg",
+      'jpeg' => "image/jpeg",
+      'png' => "image/png",
+      'bmp' => "image/bmpimage/x-bmp",
+      'tiff' => "image/tiff",
+      'tif' => "image/tiff"}
   end
+
+  def type_for(filename)
+    ext = filename.chomp.downcase.gsub(/.*\./o, '')
+    @extension_index[ext]
+  end
+  
 
   def to_multipart
     return "Content-Disposition: form-data; name=\"#{CGI::escape(k)}\"; filename=\"#{filename}\"\r\n" +
-      "Content-Type: #{MIME::Types.type_for(@filename)}\r\n\r\n" + content + "\r\n"
+      "Content-Type: #{type_for(@filename)}\r\n\r\n" + content + "\r\n"
   end
 end
 

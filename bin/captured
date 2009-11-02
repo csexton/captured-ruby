@@ -3,6 +3,8 @@ require 'rubygems'
 require 'optparse'
 require "#{File.dirname(__FILE__)}/../lib/captured"
 
+puts "YOOOOOO"
+
 options = {:config_file => "#{ENV['HOME']}/.captured.yml",
            :watch_path => "#{ENV['HOME']}/Desktop/",
            :watch_pattern => Captured.guess_watch_path, 
