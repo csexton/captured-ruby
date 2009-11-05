@@ -3,8 +3,6 @@ require 'rubygems'
 require 'optparse'
 require "#{File.dirname(__FILE__)}/../lib/captured"
 
-puts "YOOOOOO"
-
 options = {:config_file => "#{ENV['HOME']}/.captured.yml",
            :watch_path => "#{ENV['HOME']}/Desktop/",
            :watch_pattern => Captured.guess_watch_path, 
@@ -18,6 +16,11 @@ OptionParser.new do |opts|
 
   opts.on('--help', "Print this message") do
     puts "#{opts}\n"
+    exit
+  end
+
+  opts.on('--version', "Print the version") do
+    puts "Captured #{File.open("#{File.dirname(__FILE__)}/../VERSION", "r").read}"
     exit
   end
 
