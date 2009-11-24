@@ -28,13 +28,26 @@ Then you will need to exit that config file with the appropriate settings for yo
 
 When you install it will copy an example config file to ~/.captured.yml, which has a few examples of possible configuration types.
 
+Using Captured
+==============
+
+The main use is to upload a screen shot taken using OS X's built in screen capture.
+
+ 1. Press ⌘-⇧ -4 to capture
+ 2. Paste the link
+
+Captured can also be used from the command line to easily share files.
+
+ 1. Run `captured path/to/file`
+ 2. Paste the link
+
 Install Type: Imageshack
 ------------------------
 The easiest way to do this is to use the image shack service. This service is a little slower, but is free and easy.
 
 <pre>
-	upload:
-	  type: scp
+    upload:
+      type: imageshack
 </pre>
 
 Install Type: scp
