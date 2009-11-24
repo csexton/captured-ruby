@@ -1,13 +1,18 @@
 # Example captured configuration file
 #
-#  Standard upload type: Image Shack
+#  Upload type: Image Shack
 #  =================================
-#
-#  The default option is to post your images to imageshack.us, if you want to
-#  use one of the more advances and felxable types simply comment this out.
 
 upload:
   type: imageshack
+
+#  Standard upload type: Imgur
+#  =================================
+#
+#  The simple image sharer
+
+#upload:
+#  type: imgur
 
 #
 #  Powerful upload type: scp

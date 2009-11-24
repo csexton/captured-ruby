@@ -11,13 +11,16 @@ class FileUploader
     @growl_path = options[:growl_path] || "/usr/local/bin/growlnotify"
     @config = YAML.load_file(options[:config_file])
     case @config['upload']['type']
-    when"eval"
+    when "eval"
       require File.expand_path(File.dirname(__FILE__) + '/uploaders/eval_uploader')
       @uploader = EvalUploader.new(@config)
-    when"scp"
+    when "scp"
       require File.expand_path(File.dirname(__FILE__) + '/uploaders/scp_uploader')
       @uploader = ScpUploader.new(@config)
-    when"imageshack"
+    when "imgur"
+      require File.expand_path(File.dirname(__FILE__) + '/uploaders/imgur_uploader')
+      @uploader = ImgurUploader.new
+    when "imageshack"
       require File.expand_path(File.dirname(__FILE__) + '/uploaders/imageshack_uploader')
       @uploader = ImageshackUploader.new(@config)
     else
@@ -58,5 +61,7 @@ class FileUploader
     if File.exists? @growl_path
       raise "Growl Failed" unless system("#{@growl_path} -t 'Captured' -m '#{msg}' --image '#{image}'")
     end
+  rescue
+    puts "Growl Notify Error"
   end
 end

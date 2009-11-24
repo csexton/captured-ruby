@@ -56,6 +56,15 @@ The easiest way to do this is to use the image shack service. This service is a 
       type: imageshack
 </pre>
 
+Type: Imgur
+----------------
+The simple image sharer
+
+<pre>
+    upload:
+      type: imgur
+</pre>
+
 Type: scp
 ---------
 
