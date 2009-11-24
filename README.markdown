@@ -18,15 +18,12 @@ With that said, once things are installed and configured it really is handy.
 Install
 =======
 
-to install captured:
+To install captured:
 
-	$ sudo gem install captured
-	$ captured --install
-	$ open -e ~/.captured.yml
+    $ sudo gem install captured
+    $ captured --install
 
-Then you will need to exit that config file with the appropriate settings for your server.
-
-When you install it will copy an example config file to ~/.captured.yml, which has a few examples of possible configuration types.
+When you install an example config file to ~/.captured.yml, which has a few examples of possible configuration types.
 
 Using Captured
 ==============
@@ -41,8 +38,17 @@ Captured can also be used from the command line to easily share files.
  1. Run `captured path/to/file`
  2. Paste the link
 
-Install Type: Imageshack
-------------------------
+Configuration
+=============
+
+By default captured uses Imageshack as the host, but you can configure it to upload and share images by other services.
+
+To edit the configuraiton:
+
+    $ open -e ~/.captured.yml
+
+Type: Imageshack
+----------------
 The easiest way to do this is to use the image shack service. This service is a little slower, but is free and easy.
 
 <pre>
@@ -50,8 +56,8 @@ The easiest way to do this is to use the image shack service. This service is a 
       type: imageshack
 </pre>
 
-Install Type: scp
------------------
+Type: scp
+---------
 
 If you have you own web server scp is a very handy way to host your own captures.
 
