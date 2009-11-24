@@ -33,7 +33,7 @@ Using Captured
 
 The main use is to upload a screen shot taken using OS X's built in screen capture.
 
- 1. Press ⌘-⇧ -4 to capture
+ 1. Press ⌘⇧4 to capture
  2. Paste the link
 
 Captured can also be used from the command line to easily share files.
