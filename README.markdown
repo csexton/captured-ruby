@@ -41,29 +41,30 @@ Captured can also be used from the command line to easily share files.
 Configuration
 =============
 
-By default captured uses Imageshack as the host, but you can configure it to upload and share images by other services.
+By default captured uses Imgur as the default host, but you can configure it to upload and share images by other services.
 
 To edit the configuraiton:
 
     $ open -e ~/.captured.yml
 
+Type: Imgur
+----------------
+The simple image sharer. The default option.
+
+<pre>
+    upload:
+      type: imgur
+</pre>
+
 Type: Imageshack
 ----------------
-The easiest way to do this is to use the image shack service. This service is a little slower, but is free and easy.
+This service is a little slower, but is free and easy.
 
 <pre>
     upload:
       type: imageshack
 </pre>
 
-Type: Imgur
-----------------
-The simple image sharer
-
-<pre>
-    upload:
-      type: imgur
-</pre>
 
 Type: scp
 ---------

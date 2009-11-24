@@ -1,18 +1,19 @@
 # Example captured configuration file
 #
-#  Upload type: Image Shack
-#  =================================
 
-upload:
-  type: imageshack
-
-#  Standard upload type: Imgur
+#  Upload type: Imgur
 #  =================================
 #
 #  The simple image sharer
 
+upload:
+  type: imgur
+
+#  Upload type: Image Shack
+#  =================================
+
 #upload:
-#  type: imgur
+#  type: imageshack
 
 #
 #  Powerful upload type: scp

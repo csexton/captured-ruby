@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{captured}
-  s.version = "0.2.6"
+  s.version = "0.2.8"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Christopher Sexton"]
-  s.date = %q{2009-11-02}
+  s.date = %q{2009-11-24}
   s.default_executable = %q{captured}
   s.description = %q{Because <shift>-<command>-4 is the single most useful shorcut in Macdom}
   s.email = %q{csexton@gmail.com}
@@ -20,6 +20,7 @@ Gem::Specification.new do |s|
   ]
   s.files = [
     "README.markdown",
+     "VERSION",
      "bin/captured",
      "etc/captured.yml-example",
      "etc/launchd.plist.erb",
@@ -29,6 +30,7 @@ Gem::Specification.new do |s|
      "lib/captured/fs_events.rb",
      "lib/captured/uploaders/eval_uploader.rb",
      "lib/captured/uploaders/imageshack_uploader.rb",
+     "lib/captured/uploaders/imgur_uploader.rb",
      "lib/captured/uploaders/scp_uploader.rb",
      "resources/2uparrow.png",
      "resources/action_run.png",
@@ -64,11 +66,14 @@ Gem::Specification.new do |s|
     s.specification_version = 3
 
     if Gem::Version.new(Gem::RubyGemsVersion) >= Gem::Version.new('1.2.0') then
+      s.add_runtime_dependency(%q<imgur>, [">= 0"])
       s.add_runtime_dependency(%q<net-scp>, [">= 0"])
     else
+      s.add_dependency(%q<imgur>, [">= 0"])
       s.add_dependency(%q<net-scp>, [">= 0"])
     end
   else
+    s.add_dependency(%q<imgur>, [">= 0"])
     s.add_dependency(%q<net-scp>, [">= 0"])
   end
 end
