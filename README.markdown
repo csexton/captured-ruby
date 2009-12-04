@@ -1,6 +1,8 @@
 captured
 ========
 
+![Captured Trap](http://github.com/csexton/captured/raw/master/resources/captured.png)
+
 Quick screen capture and sharing application for Mac OS X.
 
 By programmers for programmers
