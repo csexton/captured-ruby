@@ -50,7 +50,7 @@ To edit the configuraiton:
     $ open -e ~/.captured.yml
 
 Type: Imgur
-----------------
+-----------
 The simple image sharer. The default option.
 
 <pre>
