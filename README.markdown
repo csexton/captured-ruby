@@ -5,15 +5,15 @@ captured
 
 Quick screen capture and sharing application for Mac OS X.
 
-By programmers for programmers
-==============================
+Screen Capture Sharing Tool
+===========================
 
-While I would love to tinker with this to make it easy to install (it is really easy to use once it is setup), it proved to be non-trivial.
+I made captured because I wanted to customize and extend screen capture sharing programs, it is really intended for the commandline savvy.
 
 So, I am making some assumptions about the environment that captured runs in. In particular it expects:
 
  * A decent understanding of installing ruby gems
- * That [Growl](http://growl.info/) (and the [growlnotify](http://growl.info/documentation/growlnotify.php) command-line tool) are installed
+ * That [Growl](http://growl.info/) is installed
 
 With that said, once things are installed and configured it really is handy.
 
@@ -32,7 +32,7 @@ Using Captured
 
 The main use is to upload a screen shot taken using OS X's built in screen capture.
 
- 1. Press ⌘⇧4 to capture
+ 1. Press ⌘-⇧-4 to capture
  2. Paste the link
 
 Captured can also be used from the command line to easily share files.
@@ -54,8 +54,8 @@ Type: Imgur
 The simple image sharer. The default option.
 
 <pre>
-    upload:
-      type: imgur
+upload:
+  type: imgur
 </pre>
 
 Type: Imageshack
@@ -63,8 +63,8 @@ Type: Imageshack
 This service is a little slower, but is free and easy.
 
 <pre>
-    upload:
-      type: imageshack
+upload:
+  type: imageshack
 </pre>
 
 
@@ -80,13 +80,13 @@ If you have you own web server scp is a very handy way to host your own captures
  * path - the remote path to upload to
 
 <pre>
-	upload:
-	  type: scp
-	  user: user
-	  password: secret
-	  host: example.com
-	  path: path/to/captured/
-	  url: "http://example.com/captured/"
+upload:
+  type: scp
+  user: user
+  password: secret
+  host: example.com
+  path: path/to/captured/
+  url: "http://example.com/captured/"
 </pre>
 
 Icons
@@ -99,4 +99,4 @@ The Logo was made from the fantastic Vector Wood Signs by [DragonArt](http://dra
 Copyright
 =========
 
-Copyright (c) 2009 Christopher Sexton. See LICENSE for details.
+Copyright (c) 2010 Christopher Sexton. See LICENSE for details.

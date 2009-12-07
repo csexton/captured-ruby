@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{captured}
-  s.version = "0.2.8"
+  s.version = "0.2.9"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Christopher Sexton"]
-  s.date = %q{2009-11-24}
+  s.date = %q{2009-12-07}
   s.default_executable = %q{captured}
   s.description = %q{Because <shift>-<command>-4 is the single most useful shorcut in Macdom}
   s.email = %q{csexton@gmail.com}
@@ -34,8 +34,11 @@ Gem::Specification.new do |s|
      "lib/captured/uploaders/scp_uploader.rb",
      "resources/2uparrow.png",
      "resources/action_run.png",
+     "resources/captured-box.png",
+     "resources/captured-empty-box.png",
      "resources/captured.png",
      "resources/green_check.png",
+     "resources/growlnotify",
      "resources/red_star.png",
      "resources/red_x.png",
      "resources/ruby.png",
