@@ -11,7 +11,7 @@ describe "File Uploader" do
     @options = {:config_file => File.dirname(__FILE__) + '/fixtures/scp_config.yml',
       :watch_path => File.dirname(__FILE__) + '/../tmp/watch_path',
       :watch_pattern => Captured.guess_watch_path,
-      :growl_path => "/usr/local/bin/growlnotify" }
+      :growl_path => "#{File.dirname(File.expand_path(__FILE__))}/../resources/growlnotify" }
   end
 
   after(:all) do
