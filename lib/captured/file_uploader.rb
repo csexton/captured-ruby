@@ -8,7 +8,7 @@ class FileUploader
   end
 
   def initialize(options)
-    @growl_path = options[:growl_path] || "/usr/local/bin/growlnotify"
+    @growl_path = options[:growl_path] || "#{File.dirname(File.expand_path(__FILE__))}/../../resources/growlnotify"
     @config = YAML.load_file(options[:config_file])
     case @config['upload']['type']
     when "eval"
