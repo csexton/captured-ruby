@@ -1,3 +1,4 @@
+require "#{File.dirname(__FILE__)}/captured/history"
 require "#{File.dirname(__FILE__)}/captured/file_tracker"
 require "#{File.dirname(__FILE__)}/captured/file_uploader"
 

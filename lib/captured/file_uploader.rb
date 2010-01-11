@@ -50,6 +50,7 @@ class FileUploader
     puts "Uploaded '#{file}' to '#{remote_path}'"
     pbcopy remote_path
     growl("Upload Succeeded", "#{File.dirname(File.expand_path(__FILE__))}/../../resources/green_check.png")
+    History.append(file, remote_path)
   rescue => e
     puts e
     puts e.backtrace
