@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{captured}
-  s.version = "0.2.9"
+  s.version = "0.3.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Christopher Sexton"]
-  s.date = %q{2009-12-07}
+  s.date = %q{2010-01-11}
   s.default_executable = %q{captured}
   s.description = %q{Because <shift>-<command>-4 is the single most useful shorcut in Macdom}
   s.email = %q{csexton@gmail.com}
@@ -28,6 +28,7 @@ Gem::Specification.new do |s|
      "lib/captured/file_tracker.rb",
      "lib/captured/file_uploader.rb",
      "lib/captured/fs_events.rb",
+     "lib/captured/history.rb",
      "lib/captured/uploaders/eval_uploader.rb",
      "lib/captured/uploaders/imageshack_uploader.rb",
      "lib/captured/uploaders/imgur_uploader.rb",
@@ -45,9 +46,12 @@ Gem::Specification.new do |s|
      "spec/bin/mockgrowlnotify",
      "spec/captured_spec.rb",
      "spec/file_uploader_spec.rb",
+     "spec/fixtures/history",
      "spec/fixtures/scp_config.yml",
+     "spec/history_spec.rb",
      "spec/spec_helper.rb",
      "spec/uploader_specs/imageshack_uploader_spec.rb",
+     "spec/uploader_specs/imgur_uploader_spec.rb",
      "spec/uploader_specs/scp_uploader_spec.rb"
   ]
   s.homepage = %q{http://github.com/csexton/captured}
@@ -59,8 +63,10 @@ Gem::Specification.new do |s|
   s.test_files = [
     "spec/captured_spec.rb",
      "spec/file_uploader_spec.rb",
+     "spec/history_spec.rb",
      "spec/spec_helper.rb",
      "spec/uploader_specs/imageshack_uploader_spec.rb",
+     "spec/uploader_specs/imgur_uploader_spec.rb",
      "spec/uploader_specs/scp_uploader_spec.rb"
   ]
 
