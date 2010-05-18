@@ -50,8 +50,8 @@ OptionParser.new do |opts|
 
   opts.on('--remove', "Remove captured from launchd") do
     puts "Uninstalling captured" 
-    File.delete "#{ENV['HOME']}/Library/LaunchAgents/com.github.csexton.captured"
-    system "launchctl remove com.github.csexton.captured"
+    File.delete "#{ENV['HOME']}/Library/LaunchAgents/com.codeography.captured"
+    system "launchctl remove com.codeography.captured"
     exit
   end
 
@@ -88,7 +88,7 @@ if options[:install] == true
     plist_path = "#{ENV['HOME']}/Library/LaunchAgents/"
     template = ERB.new(File.open("#{File.dirname(__FILE__)}/../etc/launchd.plist.erb", 'r').read)
     FileUtils.mkdir_p plist_path
-    File.open("#{plist_path}/com.github.csexton.captured", 'w') do |f| 
+    File.open("#{plist_path}/com.codeography.captured", 'w') do |f| 
       f.write(template.result(binding)) 
     end
     system "launchctl load ~/Library/LaunchAgents"
