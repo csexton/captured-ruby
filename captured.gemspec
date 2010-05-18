@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{captured}
-  s.version = "0.4.0"
+  s.version = "0.4.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Christopher Sexton"]
@@ -55,6 +55,19 @@ Gem::Specification.new do |s|
      "spec/uploader_specs/scp_uploader_spec.rb"
   ]
   s.homepage = %q{http://github.com/csexton/captured}
+  s.post_install_message = %q{
+   =========================================================================
+
+             Thanks for installing Captured! You can now run:
+
+   captured --install      to setup launchd to run captured in the background
+
+    When you install an example config file to ~/.captured.yml, which has a
+    few examples of possible configuration types.
+
+   =========================================================================
+
+}
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
   s.rubyforge_project = %q{captured}

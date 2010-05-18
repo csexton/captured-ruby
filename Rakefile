@@ -15,6 +15,20 @@ begin
     gem.add_dependency('net-scp')
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
     gem.files = FileList["VERSION", "[A-Z]*.*", "{bin,etc,lib,features,resources,spec}/**/*"]
+    gem.post_install_message = <<MESSAGE
+
+   =========================================================================
+
+             Thanks for installing Captured! You can now run:
+
+   captured --install      to setup launchd to run captured in the background
+
+    When you install an example config file to ~/.captured.yml, which has a
+    few examples of possible configuration types.
+
+   =========================================================================
+
+MESSAGE
   end
 
   Jeweler::GemcutterTasks.new
