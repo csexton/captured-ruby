@@ -1,7 +1,7 @@
 captured
 ========
 
-<img src="http://github.com/csexton/captured/raw/master/resources/captured.png" align="right" />
+<img src="https://github.com/csexton/captured/raw/master/resources/captured.png" align="right" />
 
 Quick screen capture and sharing application for Mac OS X.
 
