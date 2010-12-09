@@ -1,12 +1,12 @@
 captured
 ========
 
-<img src="https://github.com/csexton/captured/raw/master/resources/captured.png" align="right" />
-
-Quick screen capture and sharing application for Mac OS X.
+Quick screen capture and sharing for Mac OS X.
 
 Screen Capture Sharing Tool
 ===========================
+
+<img src="https://github.com/csexton/captured/raw/master/resources/captured.png" align="right" />
 
 I made captured because I wanted to customize and extend screen capture sharing programs, it is really intended for the commandline savvy.
 
