@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 require 'rubygems'
 require 'optparse'
+require 'fileutils'
 require "#{File.dirname(__FILE__)}/../lib/captured"
 
 options = {:config_file => "#{ENV['HOME']}/.captured.yml",
