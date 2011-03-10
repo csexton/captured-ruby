@@ -3,6 +3,8 @@ captured
 
 Quick screen capture and sharing for Mac OS X.
 
+_Note: I have switched my efforts to working on a native Mac version of Captured, which is avaliable on the [Mac App Store](http://itunes.apple.com/us/app/captured/id414675451?mt=12). I recomend it over the ruby version because it is faster, lighter on system resources, and has a slightly diffrent feature set. The native version is a paid app (only 99¢), and the ruby version will always be free and open source. Thanks, Chris_
+
 Screen Capture Sharing Tool
 ===========================
 
